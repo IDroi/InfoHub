@@ -21,7 +21,7 @@ allprojects {
 Add dependencies
 
 ```ruby
-   compile ('com.idroi.infohub:+'){
+   compile ('com.idroi:infohub:+'){
         changing=true
     }
 ```
