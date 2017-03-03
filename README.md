@@ -6,9 +6,9 @@ A library provides you to use Infohub from your Android app.
 ## Installation
 
 ### Android
-The easiest way to use Infohub's API is with gradle. 
+The easiest way to use Infohub's API is with gradle. There are two steps. 
 
-1. Add the following lines to your root `build.gradle` at the end of repositories:
+* Add the following lines to your root `build.gradle` at the end of repositories:
 
 
 ```ruby
@@ -20,7 +20,7 @@ allprojects {
 }
 ```
 
-2. Add dependencies
+* Add dependencies
 
 ```ruby
    compile ('com.idroi:infohub:+'){
