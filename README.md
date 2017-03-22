@@ -26,9 +26,6 @@ allprojects {
    compile ('com.idroi:infohub:+'){
         changing=true
     }
-   compile ('com.idroi:mopub:+'){
-        changing=true
-    }
 ```
 
 * Other dependencies - Droi
