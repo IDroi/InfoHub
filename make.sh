@@ -6,28 +6,30 @@
 # Created Time: 2017-03-14 11:27:56
 #########################################################################
 
-OLD='1.2.18'
-VERSION='1.2.21'
-INFOHUB_DIR='com/idroi/infohub'
+project_name='infohub'
 
-eval 'mkdir -p $INFOHUB_DIR/$VERSION'
+old='1.2.21'
+version='1.2.22'
+dir='com/idroi/infohub'
 
-eval 'cp -r $INFOHUB_DIR/$OLD/* $INFOHUB_DIR/$VERSION'
+#-- create directory for new version
+eval 'mkdir -p $dir/$version'
+eval 'cp -r $dir/$old/* $dir/$version'
+eval 'mv $dir/$version/$project_name-$old.pom $dir/$version/$project_name-$version.pom'
 
-eval 'mv $INFOHUB_DIR/$VERSION/infohub-$OLD.pom $INFOHUB_DIR/$VERSION/infohub-$VERSION.pom'
 
-eval 'sed -i "s/$OLD/$VERSION/g" $INFOHUB_DIR/$VERSION/infohub-$VERSION.pom'
+#-- revise aar and pom
+eval 'sed -i "s/$old/$version/g" $dir/$version/$project_name-$version.pom'
+eval 'rm $dir/$version/$project_name-$old.aar'
+eval 'cp $project_name-release.aar $dir/$version/$project_name-$version.aar'
 
-eval 'rm $INFOHUB_DIR/$VERSION/infohub-$OLD.aar'
-#eval 'rm $INFOHUB_DIR/$VERSION/infohub-$VERSION.pome'
 
-eval 'cp infohub-release.aar $INFOHUB_DIR/$VERSION/infohub-$VERSION.aar'
-
-INFOHUB_META='com/idroi/infohub/maven-metadata.xml'
-
-eval 'sed -i "/<release>/c\ \ \ \ <release>$VERSION<\/release>" $INFOHUB_META'
-
-eval 'sed -i "/<version>$OLD<\/version>/a \ \ \ \ \ \ <version>$VERSION<\/version>" $INFOHUB_META'
+#-- change directory to revise maven-metadata and last updated
+cd $dir
+eval 'sed -i "/<release>/c\ \ \ \ <release>$version<\/release>" maven-metadata.xml'
+eval 'sed -i "/<version>$old<\/version>/a \ \ \ \ \ \ <version>$version<\/version>" maven-metadata.xml'
 
 NOW=$(date +'%Y%m%d%H%M%S')
-eval 'sed -i "/<lastUpdated>/c\ \ \ \ <lastUpdated>$NOW<\/lastUpdated>" $INFOHUB_META'
+eval 'sed -i "/<lastUpdated>/c\ \ \ \ <lastUpdated>$NOW<\/lastUpdated>" maven-metadata.xml'
+
+cd -
